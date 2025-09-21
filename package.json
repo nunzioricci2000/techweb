@@ -1,0 +1,22 @@
+{
+  "name": "techweb",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/nunzioricci2000/techweb#readme",
+  "bugs": {
+    "url": "https://github.com/nunzioricci2000/techweb/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nunzioricci2000/techweb.git"
+  },
+  "license": "ISC",
+  "author": "Nunzio Ricci",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "workspaces": [
+    "backend"
+  ]
+}

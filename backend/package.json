@@ -1,0 +1,18 @@
+{
+  "name": "techweb-backend",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "Nunzio Ricci",
+  "type": "module",
+  "scripts": {
+    "clean": "rm -R dist",
+    "build": "npx tsc",
+    "test": "npm run build && node --test dist/**/*.test.js",
+    "start": "npm run build && node ./dist/index.js"
+  },
+  "dependencies": {
+    "@types/node": "^24.5.2",
+    "typescript": "^5.9.2"
+  }
+}
