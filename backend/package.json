@@ -1,0 +1,13 @@
+{
+  "name": "techweb-backend",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "Nunzio Ricci",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node --test"
+  },
+  "devDependencies": {}
+}

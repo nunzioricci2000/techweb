@@ -1,0 +1,30 @@
+{
+  "name": "techweb",
+  "version": "1.0.0",
+  "description": "Fake Restaurants is a playful restaurant review platform developed as an exam project for the Web Technologies course at the University of Naples \"Federico II\" during my Bachelor's degree in Computer Science.",
+  "keywords": [
+    "restaurant",
+    "review",
+    "meme",
+    "university"
+  ],
+  "homepage": "https://github.com/nunzioricci2000/techweb#readme",
+  "bugs": {
+    "url": "https://github.com/nunzioricci2000/techweb/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nunzioricci2000/techweb.git"
+  },
+  "license": "SEE LICENSE IN LICENCE",
+  "author": "Nunzio Ricci",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --test"
+  },
+  "workspaces": [
+    "frontend",
+    "backend"
+  ]
+}
