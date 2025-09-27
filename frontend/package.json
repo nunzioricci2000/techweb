@@ -7,6 +7,10 @@
   "type": "module",
   "main": "src/index.js",
   "scripts": {
+    "start": "npx light-server -s . -w '**' -o /src/index.html",
     "test": "node --test"
+  },
+  "devDependencies": {
+    "light-server": "^2.9.1"
   }
 }
