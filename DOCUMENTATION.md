@@ -36,3 +36,10 @@ This project uses tools from the Modern Web suite, such as @web/dev-server, for 
 - **Minimal Invasiveness**: Although some tools in the suite may rely on dependencies such as Babel (which may not be ideal), their impact is limited and well defined.
 - **Extreme Flexibility**: These tools are minimally invasive, allowing you to easily abandon or replace them—even in a single day—if the project requires it.
 
+### Pico CSS
+
+Pico CSS is a minimalist CSS framework that provides a clean and modern design without overwhelming complexity. It is chosen for its:
+
+- **Simplicity**: Pico CSS offers a straightforward approach to styling, making it easy to implement and customize.
+- **Lightweight**: Its minimal footprint ensures fast load times and efficient performance.
+- **Aesthetic Appeal**: Pico CSS provides a visually appealing design that enhances user experience without extensive customization.
