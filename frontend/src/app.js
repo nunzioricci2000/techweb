@@ -1,4 +1,4 @@
-import { h, render } from 'https://esm.sh/preact';
+import { h, render } from 'preact';
 
 const app = h('h1', null, 'Hello World!');
 

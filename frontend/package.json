@@ -7,10 +7,13 @@
   "type": "module",
   "main": "src/index.js",
   "scripts": {
-    "start": "npx light-server -s . -w '**' -o /src/index.html",
+    "start": "npx web-dev-server -c dev-server.config.js",
     "test": "node --test"
   },
   "devDependencies": {
-    "light-server": "^2.9.1"
+    "@web/dev-server": "^0.4.6"
+  },
+  "dependencies": {
+    "preact": "^10.27.2"
   }
 }
