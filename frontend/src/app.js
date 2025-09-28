@@ -1,5 +1,6 @@
-import { h, render } from 'preact';
+import { render } from 'preact';
+import { html } from 'htm/preact';
 
-const app = h('h1', null, 'Hello World!');
+const app = html`<h1>Hello, World!</h1>`;
 
 render(app, document.body);
