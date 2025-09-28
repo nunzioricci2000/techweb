@@ -43,3 +43,7 @@ Pico CSS is a minimalist CSS framework that provides a clean and modern design w
 - **Simplicity**: Pico CSS offers a straightforward approach to styling, making it easy to implement and customize.
 - **Lightweight**: Its minimal footprint ensures fast load times and efficient performance.
 - **Aesthetic Appeal**: Pico CSS provides a visually appealing design that enhances user experience without extensive customization.
+
+### Why not a `static` folder?
+
+As said, the project is intended to have as less "build steps" as possibile (ideally zero) for this reason seams unnecessary to have a `static` folder, since all the files in `src` are served nearly as-is.
