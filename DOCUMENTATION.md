@@ -6,7 +6,7 @@ This project is designed to foster a deeper understanding of web development whi
 
 ## Choices That Shape Our Project
 
-The tools and technologies selected prioritize simplicity, flexibility, and alignment with learning goals. Below is an overview of these choices and their rationale:
+The tools and technologies and architectural choices selected prioritize simplicity, flexibility, and alignment with learning goals. Below is an overview of these choices and their rationale:
 
 ### Preact
 
@@ -35,6 +35,12 @@ This project uses tools from the Modern Web suite, such as @web/dev-server, for 
 - **Intuitive Interface**: Modern Web tools are easy to use and do not add unnecessary complexity.
 - **Minimal Invasiveness**: Although some tools in the suite may rely on dependencies such as Babel (which may not be ideal), their impact is limited and well defined.
 - **Extreme Flexibility**: These tools are minimally invasive, allowing you to easily abandon or replace them—even in a single day—if the project requires it.
+
+#### Why not a No-Build Worflow?
+
+The project aims to minimize "build steps" to streamline development and reduce complexity. While a no-build workflow is ideal, certain tools may still require minimal processing. The goal is to keep these steps as simple and unobtrusive as possible, ensuring that the core learning experience remains focused on fundamental web technologies.
+
+Using a no-build workflow would require tools like *import maps*, but this approach presents challenges: it either requires external dependencies (physically external, hosted on another server) or involves workarounds to serve them locally from the node_modules folder. These solutions would be somewhat hacky and lack elegance, which conflicts with the project's philosophy of simplicity and clarity.
 
 ### Pico CSS
 
