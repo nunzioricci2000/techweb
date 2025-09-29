@@ -7,6 +7,7 @@
   "type": "module",
   "main": "src/index.js",
   "scripts": {
+    "postinstall": "node scripts/postinstall.js",
     "start": "npx web-dev-server -c dev-server.config.js",
     "test": "node --test"
   },
@@ -15,6 +16,7 @@
   },
   "dependencies": {
     "htm": "^3.1.1",
-    "preact": "^10.27.2"
+    "preact": "^10.27.2",
+    "preact-router": "^4.1.2"
   }
 }
