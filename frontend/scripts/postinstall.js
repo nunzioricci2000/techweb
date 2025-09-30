@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "fs/promises";
 import path from "path";
 
 /**
@@ -16,11 +16,11 @@ async function downloadFile(source, destination, fileName) {
   }
   const data = Buffer.from(await response.arrayBuffer());
   const filePath = path.join(destination, fileName);
-  await new Promise((resolve) => fs.writeFile(filePath, data, resolve));
+  await fs.writeFile(filePath, data);
 }
 
 const source = "https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.css";
-const destination = "src";
+const destination = "src/lib";
 process.stdout.write('Downloading PicoCSS... ');
 downloadFile(source, destination, "pico.css");
 process.stdout.write('DONE\n');
