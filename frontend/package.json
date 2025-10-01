@@ -9,6 +9,7 @@
   "scripts": {
     "postinstall": "node scripts/postinstall.js",
     "start": "npx web-dev-server -c config/dev-server.config.js",
+    "lint": "npx eslint .",
     "test": "node --test"
   },
   "devDependencies": {
