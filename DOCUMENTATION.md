@@ -53,3 +53,9 @@ Pico CSS is a minimalist CSS framework that provides a clean and modern design w
 ### Why not a `static` folder?
 
 As said, the project is intended to have as less "build steps" as possibile (ideally zero) for this reason seams unnecessary to have a `static` folder, since all the files in `src` are served nearly as-is.
+
+### Why ESLint?
+
+ESLint is chosen to maintain code quality and consistency across the project. Its benefits include:
+- **Error Detection**: ESLint helps identify potential issues and bugs in the code early in the development process.
+- **Code Consistency**: It enforces coding standards and best practices, ensuring a uniform style throughout the codebase.

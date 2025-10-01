@@ -9,7 +9,8 @@
   "scripts": {
     "postinstall": "node scripts/postinstall.js",
     "start": "npx web-dev-server -c config/dev-server.config.js",
-    "lint": "npx eslint .",
+    "lint": "npx eslint -c config/eslint.config.js .",
+    "prettier": "npx ",
     "test": "node --test"
   },
   "devDependencies": {

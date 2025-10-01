@@ -19,8 +19,9 @@ async function downloadFile(source, destination, fileName) {
   await fs.writeFile(filePath, data);
 }
 
-const source = "https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.classless.css";
+const source =
+  "https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.classless.css";
 const destination = "src/lib";
-process.stdout.write('Downloading PicoCSS... ');
+process.stdout.write("Downloading PicoCSS... ");
 downloadFile(source, destination, "pico.classless.css");
-process.stdout.write('DONE\n');
+process.stdout.write("DONE\n");

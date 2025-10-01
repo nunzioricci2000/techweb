@@ -1,5 +1,5 @@
-import { h, render } from 'preact';
-import { App } from './app';
+import { h, render } from "preact";
+import { App } from "./app";
 
 const app = h(App);
 

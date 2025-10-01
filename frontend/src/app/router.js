@@ -1,8 +1,8 @@
-import { html } from 'htm/preact';
-import { Router } from 'preact-router';
-import HomePage from './pages/home';
-import { Fragment } from 'preact';
-import LoginPage from './pages/login';
+import { html } from "htm/preact";
+import { Router } from "preact-router";
+import HomePage from "./pages/home";
+import { Fragment } from "preact";
+import LoginPage from "./pages/login";
 
 const AppRouter = () => html`
   <${Fragment}>
