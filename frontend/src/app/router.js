@@ -2,6 +2,7 @@ import { html } from 'htm/preact';
 import { Router } from 'preact-router';
 import HomePage from './pages/home';
 import { Fragment } from 'preact';
+import LoginPage from './pages/login';
 
 const AppRouter = () => html`
   <${Fragment}>
@@ -12,11 +13,13 @@ const AppRouter = () => html`
       </hgroup>
       <nav>
         <a href="/">Home</a>
+        <a href="/login">Log in</a>
       </nav>
     </header>
     <main>
       <${Router}>
         <${HomePage} path="/" />
+        <${LoginPage} path="/login" />
       <//>
     </main>
   <//>
