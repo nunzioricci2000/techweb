@@ -1,6 +1,6 @@
-import { render } from 'preact';
-import { html } from 'htm/preact';
+import { h, render } from 'preact';
+import { App } from './app';
 
-const app = () => html`<h1>Hello, World!</h1>`;
+const app = h(App);
 
 render(app, document.body);

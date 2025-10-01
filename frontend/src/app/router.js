@@ -1,17 +1,25 @@
 import { html } from 'htm/preact';
 import { Router } from 'preact-router';
-
-const HomePage = () => html`<div>Home Page</div>`; // Componente inline per test
+import HomePage from './pages/home';
+import { Fragment } from 'preact';
 
 const AppRouter = () => html`
-  <div>
-    <nav>
-      <a href="/">Home</a>
-    </nav>
-    <${Router}>
-      <${HomePage} path="/" />
-    </${Router}>
-  </div>
+  <${Fragment}>
+    <header>
+      <hgroup>
+        <h1>Fake Restaurants</h1>
+        <p>The Nonciclopedia for Restaurants</p>
+      </hgroup>
+      <nav>
+        <a href="/">Home</a>
+      </nav>
+    </header>
+    <main>
+      <${Router}>
+        <${HomePage} path="/" />
+      <//>
+    </main>
+  <//>
 `;
 
 export default AppRouter;
