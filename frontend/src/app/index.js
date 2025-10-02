@@ -1,6 +1,5 @@
-import { h, render } from "preact";
-import { App } from "./app";
+import { html } from "htm/preact";
+import { render } from "preact";
+import App from "./app";
 
-const app = h(App);
-
-render(app, document.body);
+render(html`<${App} />`, document.body);
