@@ -1,4 +1,4 @@
-import fs from 'fs/promises'
+import fs from "fs/promises";
 
 /** @type {import('@web/dev-server').DevServerConfig} */
 export default {
