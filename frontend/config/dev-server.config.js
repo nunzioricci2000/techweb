@@ -1,3 +1,5 @@
+import fs from 'fs/promises'
+
 /** @type {import('@web/dev-server').DevServerConfig} */
 export default {
   open: "/",
@@ -5,10 +7,10 @@ export default {
   nodeResolve: true,
   watch: true,
   middleware: [
-    async (ctx, next) => {
+    async function onNotFound(ctx, next) {
       await next();
       if (ctx.status === 404) {
-        ctx.redirect("/");
+        ctx.body = (await fs.readFile("src/index.html")).toString();
       }
     },
   ],
