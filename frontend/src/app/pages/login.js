@@ -1,20 +1,20 @@
 import { html } from "htm/preact";
-import { signal, computed, batch } from "@preact/signals-core";
+import { signal, computed, batch } from "@preact/signals";
 
 const usernameError = signal("");
 const passwordError = signal("");
 
 /**
- * showUsernameError is strangely typed as true | null
+ * isUsernameInvalid is strangely typed as true | null
  * because aria-invalid behaves differently if set to
  * false or not set at all
  */
-const showUsernameError = computed(() => {
-  return usernameError.value !== "" ? true : null;
+const isUsernameInvalid = computed(() => {
+  return usernameError.value ? true : null;
 });
-/** @see showUsernameError */
-const showPasswordError = computed(() => {
-  return passwordError.value !== "" ? true : null;
+/** @see isUsernameInvalid */
+const isPasswordInvalid = computed(() => {
+  return usernameError.value ? true : null;
 });
 
 /**
@@ -54,10 +54,9 @@ export default function LoginPage() {
             name="username"
             placeholder="YourAwesomeUsername"
             autocomplete="username"
-            aria-invalid="${showUsernameError}"
+            aria-invalid="${isUsernameInvalid.value}"
           />
-          ${showUsernameError.value &&
-          html`<small>${usernameError.value}</small>`}
+          <small>${usernameError.value}</small>
         </label>
         <label>
           Password
@@ -66,10 +65,9 @@ export default function LoginPage() {
             placeholder="YourSuperSecretPassword"
             autocomplete="current-password"
             type="password"
-            aria-invalid="${showPasswordError}"
+            aria-invalid="${isPasswordInvalid.value}"
           />
-          ${showPasswordError.value &&
-          html`<small>${passwordError.value}</small>`}
+          <small>${passwordError.value}</small>
         </label>
       </fieldset>
       <input type="submit" value="Log in" />
