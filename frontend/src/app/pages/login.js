@@ -1,6 +1,7 @@
 import { html } from "htm/preact";
 import { signal, computed, batch } from "@preact/signals";
 
+const loading = signal(false);
 const usernameError = signal("");
 const passwordError = signal("");
 
@@ -22,6 +23,7 @@ const isPasswordInvalid = computed(() => {
  */
 const onSubmit = async (e) => {
   e.preventDefault();
+  loading.value = true;
   const data = new FormData(e.currentTarget);
   const username = data.get("username");
   const password = data.get("password");
@@ -38,8 +40,10 @@ const onSubmit = async (e) => {
       isInputValidated = false;
     }
   });
-  if (!isInputValidated) return;
+  if (!isInputValidated) return (loading.value = false);
+  await new Promise((r) => setTimeout(r, 2000));
   console.log("logged!");
+  loading.value = false;
 };
 
 export default function LoginPage() {
@@ -54,9 +58,9 @@ export default function LoginPage() {
             name="username"
             placeholder="YourAwesomeUsername"
             autocomplete="username"
-            aria-invalid="${isUsernameInvalid.value}"
+            aria-invalid="${isUsernameInvalid}"
           />
-          <small>${usernameError.value}</small>
+          <small>${usernameError}</small>
         </label>
         <label>
           Password
@@ -65,15 +69,23 @@ export default function LoginPage() {
             placeholder="YourSuperSecretPassword"
             autocomplete="current-password"
             type="password"
-            aria-invalid="${isPasswordInvalid.value}"
+            aria-invalid="${isPasswordInvalid}"
           />
-          <small>${passwordError.value}</small>
+          <small>${passwordError}</small>
         </label>
       </fieldset>
-      <input type="submit" value="Log in" />
-      <small
-        >You don't have an account yet? <a href="/register">Register!</a></small
+      <button
+        type="submit"
+        aria-busy="${loading}"
+        disabled="${loading}"
+        aria-label="${loading ? "processing" : ""}"
       >
+        Log in
+      </button>
+      <small
+        >You don't have an account yet?${" "}
+        <a href="/register">Register!</a>
+      </small>
     </form>
   `;
 }
