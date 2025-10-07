@@ -4,7 +4,7 @@
 
 This project is designed to foster a deeper understanding of web development while embracing modern practices in a streamlined way. Large, complex frameworks are avoided to maintain focus on the core components of web technologies: the browser and the server. This approach ensures a practical grasp of essential web development concepts without unnecessary abstraction.
 
-## Choices That Shape Our Project
+## Choices That Shape The Project
 
 The tools and technologies and architectural choices selected prioritize simplicity, flexibility, and alignment with learning goals. Below is an overview of these choices and their rationale:
 

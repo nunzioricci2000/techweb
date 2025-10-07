@@ -140,3 +140,6 @@ vite.config.ts.timestamp-*
 
 # External libraries
 **/lib/
+
+# SQLite database files
+*.sqlite
