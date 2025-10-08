@@ -18,7 +18,11 @@ export default function AuthRepository({ db }) {
      */
     getUser: async (filter) =>
       await db("USER")
-        .where(filter.byId !== undefined ? { id: filter.byId } : { username: filter.byUsername })
+        .where(
+          filter.byId !== undefined
+            ? { id: filter.byId }
+            : { username: filter.byUsername },
+        )
         .first(),
   };
 }

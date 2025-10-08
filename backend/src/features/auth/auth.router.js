@@ -15,11 +15,13 @@ const formSchema = Joi.object({
  */
 export default function AuthRouter({ authController, checkAuth }) {
   const router = new Router();
-  router.use(bodyParser({
-    onError(err, ctx) {
-      ctx.throw(422, "body parse error");
-    },
-  }));
+  router.use(
+    bodyParser({
+      onError(err, ctx) {
+        ctx.throw(422, "body parse error");
+      },
+    }),
+  );
   router.post("/login", validate(formSchema), authController.login);
   router.post("/register", validate(formSchema), authController.register);
   router.get("/me", checkAuth.required, authController.me);
