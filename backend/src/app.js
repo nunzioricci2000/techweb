@@ -2,6 +2,7 @@ import Koa from "koa";
 import Auth from "./features/auth/index.js";
 import Router from "@koa/router";
 import db from "./model/index.js";
+import cors from "@koa/cors";
 
 export default function App() {
   const app = new Koa();
@@ -10,6 +11,7 @@ export default function App() {
     await next();
     console.log(`end: ${JSON.stringify(ctx)}`);
   });
+  app.use(cors());
   app.on("error", (error) => {
     console.error(error);
   });
