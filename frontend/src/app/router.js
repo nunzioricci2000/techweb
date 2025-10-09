@@ -1,10 +1,11 @@
 import { html } from "htm/preact";
 import { Router } from "preact-router";
-import HomePage from "./pages/home";
+import HomePage from "./pages/home.js";
 import { Fragment } from "preact";
-import LoginPage from "./pages/login";
-import NotFoundPage from "./pages/not-found";
-import NavbarComponent from "./components/navbar";
+import LoginPage from "./pages/login.js";
+import NotFoundPage from "./pages/not-found.js";
+import NavbarComponent from "./components/navbar.js";
+import MePage from "./pages/me.js";
 
 const AppRouter = () => html`
   <${Fragment}>
@@ -13,6 +14,7 @@ const AppRouter = () => html`
       <${Router}>
         <${HomePage} path="/" />
         <${LoginPage} path="/login" />
+        <${MePage} path="/me" />
         <${NotFoundPage} default />
       <//>
     </main>

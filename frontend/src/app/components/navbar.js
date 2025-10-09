@@ -1,4 +1,5 @@
 import { html } from "htm/preact";
+import { isAuthenticated, username } from "../services/auth.js";
 
 export default function NavbarComponent() {
   return html`
@@ -9,7 +10,9 @@ export default function NavbarComponent() {
       </hgroup>
       <ul>
         <li><a href="/">Home</a></li>
-        <li><a href="/login">Log in</a></li>
+        ${isAuthenticated.value
+          ? html`<li><a href="/me">Hi, ${username.value}!</a></li>`
+          : html`<li><a href="/login">Log in</a></li>`}
       </ul>
     </nav>
   `;

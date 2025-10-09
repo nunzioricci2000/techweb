@@ -1,5 +1,7 @@
 import { html } from "htm/preact";
 import { signal, computed, batch } from "@preact/signals";
+import { login } from "../services/auth.js";
+import { route } from "preact-router";
 
 const loading = signal(false);
 const usernameError = signal("");
@@ -19,31 +21,54 @@ const isPasswordInvalid = computed(() => {
 });
 
 /**
+ * Validates the input fields and sets the error messages
+ * accordingly.
  * @param {SubmitEvent} e
+ * @returns { valid: boolean, username: string, password: string }
  */
-const onSubmit = async (e) => {
-  e.preventDefault();
-  loading.value = true;
-  const data = new FormData(e.currentTarget);
-  const username = data.get("username");
-  const password = data.get("password");
-  let isInputValidated = true;
+const validateInput = (e) =>
   batch(() => {
+    const data = new FormData(e.currentTarget);
+    const username = data.get("username");
+    const password = data.get("password");
+    let valid = true;
     usernameError.value = "";
     passwordError.value = "";
     if (username.length < 8) {
       usernameError.value = "The username must be 8 characters at least!";
-      isInputValidated = false;
+      valid = false;
     }
     if (password.length < 8) {
       passwordError.value = "The password must be 8 characters at least!";
-      isInputValidated = false;
+      valid = false;
     }
+    return {
+      valid,
+      username,
+      password,
+    };
   });
-  if (!isInputValidated) return (loading.value = false);
-  await new Promise((r) => setTimeout(r, 2000));
-  console.log("logged!");
-  loading.value = false;
+
+/**
+ * @param {SubmitEvent} e
+ */
+const onSubmit = async (e) => {
+  try {
+    e.preventDefault();
+    loading.value = true;
+    const { valid, username, password } = validateInput(e);
+    if (!valid) return;
+    await Promise.all([
+      login({ username, password }),
+      new Promise((res) => setTimeout(res, 500)),
+    ]);
+    route("/");
+  } catch (error) {
+    passwordError.value = error.message;
+    console.error(error);
+  } finally {
+    loading.value = false;
+  }
 };
 
 export default function LoginPage() {

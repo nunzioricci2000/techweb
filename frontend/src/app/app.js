@@ -1,5 +1,5 @@
 import { html } from "htm/preact";
-import AppRouter from "./router";
+import AppRouter from "./router.js";
 
 export default function App() {
   return html`<${AppRouter} />`;
