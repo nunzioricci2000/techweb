@@ -44,11 +44,12 @@ Using a no-build workflow would require tools like *import maps*, but this appro
 
 ### Pico CSS
 
-Pico CSS is a minimalist CSS framework that provides a clean and modern design without overwhelming complexity. It is chosen for its:
+As an educational project, my focus is on learning and understanding modern web development concepts. Whilst styling is important, CSS is covered in depth during the lectures and his understanding is provided by the written exam. For this reason, I opted for a minimalist CSS framework that allows me to focus on an important aspect of web development: semantic HTML.
+In this project, I chose Pico CSS in its class-less version for the following reasons:
 
-- **Simplicity**: Pico CSS offers a straightforward approach to styling, making it easy to implement and customize.
-- **Lightweight**: Its minimal footprint ensures fast load times and efficient performance.
-- **Aesthetic Appeal**: Pico CSS provides a visually appealing design that enhances user experience without extensive customization.
+- **Minimalist Design**: Pico CSS offers a clean and simple aesthetic that enhances the user interface without overwhelming it.
+- **Class-less Approach**: In this way, the library gives its best when semantic HTML is used, promoting good coding practices.
+- **Ease of Use**: Pico CSS is straightforward to implement, making it ideal for educational purposes where the focus is on learning rather than complex styling.
 
 ### Why not a `static` folder?
 
