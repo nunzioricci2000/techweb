@@ -1,14 +1,13 @@
+import jwt from "jsonwebtoken";
+import { expiresIn, secret } from "../../../config/jwt-config.js";
 /**
  * @returns {JwtHandler}
  */
 export default function JwtHandler() {
   return {
-    sign: (username) => `token-for-${username}`,
-    verify: (token) =>
-      token.startsWith("token-for-")
-        ? { username: token.replace("token-for-", "") }
-        : null,
-  };
+    sign: (username) => jwt.sign({ username }, secret, { expiresIn }),
+    verify: (token) => jwt.verify(token, secret),
+  }
 }
 
 /**
