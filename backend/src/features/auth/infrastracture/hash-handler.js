@@ -1,7 +1,15 @@
+import bcrypt from 'bcrypt';
+import { saltRounds } from '../../../config/hash-config';
+
+/**
+ * Creates a HashHandler object that provides hashing and comparison functions.
+ * 
+ * @returns {HashHandler} An object with the following methods:
+ */
 export default function HashHandler() {
   return {
-    hash: (string) => string,
-    compare: (string, hash) => string === hash,
+    hash: (string) => bcrypt.hashSync(string, saltRounds),
+    compare: (string, hash) => bcrypt.compareSync(string, hash),
   };
 }
 
