@@ -6,6 +6,7 @@ import LoginPage from "./pages/login.js";
 import NotFoundPage from "./pages/not-found.js";
 import NavbarComponent from "./components/navbar.js";
 import MePage from "./pages/me.js";
+import RegisterPage from "./pages/register.js";
 
 const AppRouter = () => html`
   <${Fragment}>
@@ -14,6 +15,7 @@ const AppRouter = () => html`
       <${Router}>
         <${HomePage} path="/" />
         <${LoginPage} path="/login" />
+        <${RegisterPage} path="/register" />
         <${MePage} path="/me" />
         <${NotFoundPage} default />
       <//>
