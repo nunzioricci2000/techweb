@@ -1,9 +1,9 @@
-import bcrypt from 'bcrypt';
-import { saltRounds } from '../../../config/hash-config.js';
+import bcrypt from "bcrypt";
+import { saltRounds } from "../../../config/hash-config.js";
 
 /**
  * Creates a HashHandler object that provides hashing and comparison functions.
- * 
+ *
  * @returns {HashHandler} An object with the following methods:
  */
 export default function HashHandler() {

@@ -7,7 +7,7 @@ export default function JwtHandler() {
   return {
     sign: (username) => jwt.sign({ username }, secret, { expiresIn }),
     verify: (token) => jwt.verify(token, secret),
-  }
+  };
 }
 
 /**
