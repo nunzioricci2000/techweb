@@ -1,5 +1,7 @@
-import { computed, effect, signal } from "@preact/signals";
-import { request } from "./api.js";
+import { computed, signal } from "@preact/signals";
+import { addInterceptor, request } from "./api.js";
+import { pushNotification } from "./notification.js";
+import { route } from "preact-router";
 
 /**
  * A reactive signal that holds the current authenticated user object.
@@ -66,3 +68,12 @@ export async function me() {
 export async function logout() {
   user.value = null;
 }
+
+addInterceptor((res) => {
+  if (res.status === 401) {
+    pushNotification("Session expired. Please log in again.", "error", () =>
+      route("/"),
+    );
+    logout();
+  }
+});
