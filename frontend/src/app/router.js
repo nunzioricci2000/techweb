@@ -7,6 +7,7 @@ import NotFoundPage from "./pages/not-found.js";
 import NavbarComponent from "./components/navbar.js";
 import MePage from "./pages/me.js";
 import RegisterPage from "./pages/register.js";
+import NotificationComponent from "./components/notification.js";
 
 const AppRouter = () => html`
   <${Fragment}>
@@ -20,6 +21,7 @@ const AppRouter = () => html`
         <${NotFoundPage} default />
       <//>
     </main>
+    <${NotificationComponent} />
   <//>
 `;
 
