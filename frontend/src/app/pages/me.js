@@ -1,9 +1,6 @@
 import { html } from "htm/preact";
-import { logout, me, username } from "../services/auth.js";
+import { logout, username } from "../services/auth.js";
 import { route } from "preact-router";
-import { signal } from "@preact/signals";
-
-const updatedUsername = signal(username.value);
 
 const onLogout = () => {
   logout();
@@ -11,13 +8,6 @@ const onLogout = () => {
 };
 
 const MePage = () => {
-  me()
-    .then((data) => {
-      updatedUsername.value = data.username;
-    })
-    .catch((error) => {
-      console.error(error);
-    });
   return html`
     <h2>Hi, ${username}!</h2>
     <p>
