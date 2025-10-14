@@ -1,8 +1,15 @@
 import knex from "knex";
-import config from "../config/db-config.js";
 import initUserModel from "./user.model.js";
+import initRestaurantModel from "./restaurant.model.js";
 
-const db = knex(config);
+const db = knex({
+  client: "sqlite3",
+  connection: {
+    filename: "./mydb.sqlite",
+  },
+  useNullAsDefault: true,
+});
+
 initUserModel(db);
 
 export default db;
