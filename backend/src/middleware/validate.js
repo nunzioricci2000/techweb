@@ -10,7 +10,7 @@ export default function validate(schema) {
     if (valid.error) {
       console.debug("Validation failed:", valid.value);
       ctx.status = 400;
-      ctx.body = { error: valid.error?.message ?? "Invalid credentials!" };
+      ctx.body = { error: valid.error?.message ?? "Invalid request!" };
       return;
     }
     await next();
