@@ -1,45 +1,35 @@
+import db from "../../model/index.js";
+
 /**
- * @param {AuthRepositoryDeps} deps
- * @returns {AuthRepository}
+ * Creates a new user
+ * @param {{ username: string, password: string }} user
+ * @returns { Promise<number> }
  */
-export default function AuthRepository({ db }) {
-  return {
-    /**
-     * Creates a new user
-     * @param {{ username: string, password: string }} user
-     * @returns { Promise<number> }
-     */
-    createUser: async ({ username, password }) =>
-      await db("USER").insert({ username, password }, "id"),
-    /**
-     * Retrieves user by filter
-     * @param {UserFilter} filter
-     * @returns {Promise<User|undefined>}
-     */
-    getUser: async (filter) =>
-      await db("USER")
-        .where(
-          filter.byId !== undefined
-            ? { id: filter.byId }
-            : { username: filter.byUsername },
-        )
-        .first(),
-  };
+export async function createUser({ username, password }) {
+  return await db("user").insert({ username, password }, "id");
 }
 
 /**
- * @typedef {object} AuthRepositoryDeps
- * @property {import("knex").Knex} db - Knex database instance
+ * Retrieves user by filter
+ * @param {UserFilter} filter
+ * @returns {Promise<User|undefined>}
  */
-
-/**
- * Authentication repository interface
- * @typedef {object} AuthRepository
- * @property {function(AuthData): Promise<number>} createUser - Creates a new user
- * @property {function(UserFilter): Promise<User|undefined>} getUser - Retrieves user by filter
- */
+export async function getUser(filter) {
+  await db("user")
+    .where(
+      filter.byId !== undefined
+        ? { id: filter.byId }
+        : { username: filter.byUsername },
+    )
+    .first();
+}
 
 /**
  * User filter options for database queries
  * @typedef {{ byId: number } | { byUsername: string }} UserFilter
  */
+
+export default {
+  createUser,
+  getUser,
+};
