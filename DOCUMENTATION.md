@@ -8,6 +8,73 @@ This project is designed to foster a deeper understanding of web development whi
 
 The tools and technologies and architectural choices selected prioritize simplicity, flexibility, and alignment with learning goals. Below is an overview of these choices and their rationale:
 
+### Working without classes
+
+```mjs
+/// An example with classes
+export class AuthService {
+    #authRepository;
+
+    constructor(authRepository) {
+        this.#authRepository = authRepository;
+    }
+
+    register(username, password) {
+        #authRepository.createUser({username, password});
+    }
+}
+```
+```mjs
+/// Example of usage
+import { AuthRepository } from './auth.repositiry.js';
+import { AuthService } from './auth.service.js';
+/// ...other code...
+const authRepository = new AuthRepository(db);
+const authService = new AuthService(authRepository);
+/// ...other code...
+authService.register(username, password);
+```
+
+During the early stages of development I had to cope with some stylistic and projectual choices to start writing code. From the beginning I choose to not use JavaScript classes, this is a modern approch that enhance code quality and promotes functional programming and all the advantages that this involves.
+
+```mjs
+/// An example with functions
+export function AuthService({ authRepository }) {
+    return {
+        register(username, password) {
+            authRepository.createUser({ username, password });
+        },
+    };
+}
+```
+```mjs
+/// Example of usage
+import { AuthRepository } from './auth.repositiry.js';
+import { AuthService } from './auth.service.js';
+/// ...other code...
+const authRepository = AuthRepository(db);
+const authService = AuthService(authRepository);
+/// ...other code...
+```
+
+Anyway I felt that this type of initialization was too verbose and I choose to semplify more and more, using the tools natively provided by node.js. So I removed factory functions and I used naked functions and imports:
+
+```mjs
+/// An example with bare methods
+import authRepository from './auth.repository.js';
+
+export function register(username, password) {
+    authRepository.createUser({ username, password });
+}
+
+export default { register };
+```
+```mjs
+/// Example of usage
+import authService from './auth.service.js';
+authService.register(username, password);
+```
+
 ### Preact
 
 Preact is a lightweight JavaScript library that serves as an efficient alternative to heavier frameworks. Its benefits include:

@@ -8,7 +8,10 @@ import authRepository from "./auth.repository.js";
  * @returns {Promise<AuthToken>}
  */
 export async function login({ username, password }) {
-  const user = await authRepository.getUser({ byUsername: username });
+  const user = await authRepository.getUser({
+    by: "username",
+    value: username,
+  });
   if (!user) throw Error("User not found!");
   if (!hashHandler.compare(password, user.password))
     throw Error("Wrong password!");
@@ -21,11 +24,12 @@ export async function login({ username, password }) {
  * @returns {Promise<AuthToken>}
  */
 export async function register({ username, password }) {
-  if (await authRepository.getUser({ byUsername: username }))
+  if (await authRepository.getUser({ by: "username", value: username }))
     throw Error("User already exists!");
   const hash = hashHandler.hash(password);
-  authRepository.createUser({ username, password: hash });
-  return jwtHandler.sign(username);
+  await authRepository.createUser({ username, password: hash });
+  const token = jwtHandler.sign(username);
+  return token;
 }
 
 /**
@@ -36,7 +40,10 @@ export async function register({ username, password }) {
 export function authenticate(token) {
   const payload = jwtHandler.verify(token);
   if (!payload) throw Error("Invalid token!");
-  const user = authRepository.getUser({ byUsername: payload.username });
+  const user = authRepository.getUser({
+    by: "username",
+    value: payload.username,
+  });
   if (!user) throw Error("User not found!");
   return user;
 }

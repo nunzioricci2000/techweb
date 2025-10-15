@@ -15,21 +15,29 @@ export async function createUser({ username, password }) {
  * @returns {Promise<User|undefined>}
  */
 export async function getUser(filter) {
-  await db("user")
+  return await db("user")
     .where(
-      filter.byId !== undefined
-        ? { id: filter.byId }
-        : { username: filter.byUsername },
+      filter.by === "id" ? { id: filter.value } : { username: filter.value },
     )
     .first();
 }
-
-/**
- * User filter options for database queries
- * @typedef {{ byId: number } | { byUsername: string }} UserFilter
- */
 
 export default {
   createUser,
   getUser,
 };
+
+/**
+ * User filter options for database queries
+ * @typedef {UserFilterById | UserFilterByUsername} UserFilter
+ */
+
+/**
+ * User filter by ID
+ * @typedef {{ by: 'id', value: number } } UserFilterById
+ */
+
+/**
+ * User filter by username
+ * @typedef {{ by: 'username', value: string } } UserFilterByUsername
+ */

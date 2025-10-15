@@ -9,9 +9,9 @@ export default function App() {
     user: { status: "not-checked" },
   };
   app.use(async (ctx, next) => {
-    console.log(`start: ${JSON.stringify(ctx.state)}`);
+    console.log(`start: ${JSON.stringify(ctx)}`);
     await next();
-    console.log(`end: ${JSON.stringify(ctx.state)}`);
+    console.log(`end: ${JSON.stringify(ctx)}`);
   });
   app.use(cors());
   app.on("error", (error) => {

@@ -19,7 +19,7 @@ const maxAge = process.env["JWT_MAX_AGE"];
  * @returns {string} - The signed token
  */
 export function sign(username) {
-  jwt.sign({ username }, secret, { expiresIn: maxAge });
+  return jwt.sign({ username }, secret, { expiresIn: maxAge });
 }
 
 /**
@@ -27,7 +27,12 @@ export function sign(username) {
  * @returns {{username: string} | null} - The payload if valid, null otherwise
  */
 export function verify(token) {
-  jwt.verify(token, secret);
+  try {
+    return jwt.verify(token, secret);
+  } catch (e) {
+    console.debug("JWT verification failed:", e);
+    return null;
+  }
 }
 
 export default { sign, verify };

@@ -13,7 +13,7 @@ const saltRounds = Number(process.env["SALT_ROUNDS"] ?? 10);
  * @returns {string} - The hashed string
  */
 export function hash(string) {
-  bcrypt.hashSync(string, saltRounds);
+  return bcrypt.hashSync(string, saltRounds);
 }
 
 /**
@@ -23,7 +23,7 @@ export function hash(string) {
  * @returns {boolean} - True if the string matches the hash, false otherwise
  */
 export function compare(string, hash) {
-  bcrypt.compareSync(string, hash);
+  return bcrypt.compareSync(string, hash);
 }
 
 export default { hash, compare };

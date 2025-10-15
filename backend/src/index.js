@@ -1,7 +1,7 @@
-import App from "./app.js";
-import { config } from "dotenv";
-
+const { config } = await import("dotenv");
 config();
+
+const { default: App } = await import("./app.js");
 
 const app = App();
 

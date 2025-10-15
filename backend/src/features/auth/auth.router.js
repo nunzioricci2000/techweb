@@ -6,10 +6,10 @@ import prune from "../../middleware/prune.js";
 import authController from "./auth.controller.js";
 import checkAuth from "./auth.middleware.js";
 
-const username = Joi.string().alphanum().min(8).max(30).required();
-const password = Joi.string()
-  .pattern(new RegExp("^(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,30}$"))
-  .required();
+const username = Joi.string().alphanum().min(8).max(30);
+const password = Joi.string().pattern(
+  new RegExp("^(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,30}$"),
+);
 
 const router = new Router({ routerPath: "/auth" });
 
@@ -19,6 +19,11 @@ const router = new Router({ routerPath: "/auth" });
 router.get(
   //
   "/me",
+  prune(
+    Joi.object({
+      username: username.required(),
+    }),
+  ),
   checkAuth.required,
   authController.me,
 );
@@ -31,13 +36,13 @@ router.post(
   parseBody,
   validate(
     Joi.object({
-      username,
-      password,
+      username: username.required(),
+      password: password.required(),
     }),
   ),
   prune(
     Joi.object({
-      username,
+      token: Joi.string().required(),
     }),
   ),
   authController.login,
@@ -51,13 +56,13 @@ router.post(
   parseBody,
   validate(
     Joi.object({
-      username,
-      password,
+      username: username.required(),
+      password: password.required(),
     }),
   ),
   prune(
     Joi.object({
-      username,
+      token: Joi.string().required(),
     }),
   ),
   authController.register,

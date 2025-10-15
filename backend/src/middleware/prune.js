@@ -9,13 +9,13 @@ export default function prune(schema) {
     if (ctx.status >= 400) {
       return;
     }
-    const data = ctx.response.body;
+    const data = ctx.body;
     const valid = schema.validate(data, {
       abortEarly: false,
-      stripUnknown: true,
+      // stripUnknown: true,
     });
     if (valid.error) {
-      console.debug("Respone not valid:", valid.value);
+      console.debug("Response not valid:", valid.value);
       ctx.status = 500;
       ctx.body = { error: valid.error?.message ?? "Internal Error!" };
       return;
