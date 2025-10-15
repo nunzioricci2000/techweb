@@ -1,8 +1,9 @@
-import authService from "./auth.service.js";
+/** @todo Find a way to avoid this dependecy from a feature */
+import authService from "../features/auth/auth.service.js";
 
 /**
  * Check authentication middleware
- * @type {import("koa").Middleware<AppState>}
+ * @type {CheckAuth}
  */
 const checkAuth = async (ctx, next) => {
   const authHeader = ctx.headers.authorization;
@@ -37,3 +38,8 @@ checkAuth.required = async (ctx, next) => {
 };
 
 export default checkAuth;
+
+/**
+ * @typedef {import("koa").Middleware<AppState>} CheckAuth
+ * @property {import("koa").Middleware<AppState>} required - Middleware to ensure authentication
+ */

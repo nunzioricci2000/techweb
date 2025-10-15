@@ -4,7 +4,7 @@ import Joi from "joi";
 import parseBody from "../../middleware/parse-body.js";
 import prune from "../../middleware/prune.js";
 import authController from "./auth.controller.js";
-import checkAuth from "./auth.middleware.js";
+import checkAuth from "../../middleware/check-auth.js";
 
 const username = Joi.string().alphanum().min(8).max(30);
 const password = Joi.string().pattern(
