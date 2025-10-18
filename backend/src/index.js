@@ -1,9 +1,7 @@
 const { config } = await import("dotenv");
 config();
 
-const { default: App } = await import("./app.js");
-
-const app = App();
+const { default: app } = await import("./app.js");
 
 const PORT = process.env.PORT || 3000;
 

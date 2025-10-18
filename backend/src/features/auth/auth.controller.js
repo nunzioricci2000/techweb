@@ -1,45 +1,83 @@
 import authService from "./auth.service.js";
+import { route } from "../../core/route.js";
+import checkAuth from "../../middleware/check-auth.js";
+import parseBody from "../../middleware/parse-body.js";
+import validate from "../../middleware/validate.js";
+import prune from "../../middleware/prune.js";
+import Joi from "joi";
+
+const username = Joi.string().alphanum().min(8).max(30);
+const password = Joi.string().pattern(
+  new RegExp("^(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,30}$"),
+);
 
 /**
  * Login request handler
- * @type {import("koa").Middleware<AppState>}
  */
-export const login = async (ctx) => {
-  const { username, password } = ctx.request.body;
-  const token = await authService.login({ username, password });
-  if (token) {
-    ctx.body = { token };
-  } else {
-    ctx.status = 401;
-    ctx.body = { error: "Invalid credentials" };
-  }
-};
+route("post", "/auth/login", [
+  parseBody,
+  validate(
+    Joi.object({
+      username: username.required(),
+      password: password.required(),
+    }),
+  ),
+  prune(
+    Joi.object({
+      token: Joi.string().required(),
+    }),
+  ),
+  async (ctx) => {
+    const { username, password } = ctx.request.body;
+    const token = await authService.login({ username, password });
+    if (token) {
+      ctx.body = { token };
+    } else {
+      ctx.status = 401;
+      ctx.body = { error: "Invalid credentials" };
+    }
+  },
+]);
 
 /**
  * Registration request handler
- * @type {import("koa").Middleware<AppState>}
  */
-export const register = async (ctx) => {
-  const { username, password } = ctx.request.body;
-  try {
-    const token = await authService.register({ username, password });
-    ctx.body = { token };
-  } catch (error) {
-    ctx.status = 400;
-    ctx.body = { error: error.message };
-  }
-};
+route("post", "/auth/register", [
+  parseBody,
+  validate(
+    Joi.object({
+      username: username.required(),
+      password: password.required(),
+    }),
+  ),
+  prune(
+    Joi.object({
+      token: Joi.string().required(),
+    }),
+  ),
+  async (ctx) => {
+    const { username, password } = ctx.request.body;
+    try {
+      const token = await authService.register({ username, password });
+      ctx.body = { token };
+    } catch (error) {
+      ctx.status = 400;
+      ctx.body = { error: error.message };
+    }
+  },
+]);
 
 /**
  * Get current user info
- * @type {import("koa").Middleware<AppState>}
  */
-export const me = (ctx) => {
-  ctx.body = { username: ctx.state.user.username };
-};
-
-export default {
-  login,
-  register,
-  me,
-};
+route("get", "/auth/me", [
+  prune(
+    Joi.object({
+      username: username.required(),
+    }),
+  ),
+  checkAuth.required,
+  (ctx) => {
+    ctx.body = { username: ctx.state.user.username };
+  },
+]);

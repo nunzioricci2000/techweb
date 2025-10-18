@@ -1,5 +1,5 @@
-import hashHandler from "./infrastracture/hash-handler.js";
-import jwtHandler from "./infrastracture/jwt-handler.js";
+import hashHandler from "../../core/hash-handler.js";
+import jwtHandler from "../../core/jwt-handler.js";
 import authRepository from "./auth.repository.js";
 
 /**

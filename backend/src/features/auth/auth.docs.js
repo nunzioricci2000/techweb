@@ -15,7 +15,7 @@
  * AuthData object structure
  * @typedef {object} AuthData
  * @property {string} username - User's username (unique)
- * @property {string} password - User's hashed password
+ * @property {string} password - User's password (may be hashed)
  */
 
 /**
