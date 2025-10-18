@@ -11,5 +11,6 @@ const db = knex({
 });
 
 initUserModel(db);
+initRestaurantModel(db);
 
 export default db;
