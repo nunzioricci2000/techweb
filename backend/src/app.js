@@ -1,24 +1,20 @@
 import Koa from "koa";
-import authRouter from "./features/auth/auth.router.js";
 import Router from "@koa/router";
 import cors from "@koa/cors";
+import { getCurrentRouter, setCurrentRouter } from "./core/route.js";
 
-export default function App() {
-  const app = new Koa();
-  app.context.state = {
-    user: { status: "not-checked" },
-  };
-  app.use(async (ctx, next) => {
-    console.log(`start: ${JSON.stringify(ctx)}`);
-    await next();
-    console.log(`end: ${JSON.stringify(ctx)}`);
-  });
-  app.use(cors());
-  app.on("error", (error) => {
-    console.error(error);
-  });
-  const router = new Router();
-  router.use("/auth", authRouter.routes(), authRouter.allowedMethods());
-  app.use(router.routes());
-  return app;
-}
+const app = new Koa();
+app.use(async (ctx, next) => {
+  console.log(`start: ${JSON.stringify(ctx)}`);
+  await next();
+  console.log(`end: ${JSON.stringify(ctx)}`);
+});
+app.use(cors());
+app.on("error", (error) => {
+  console.error(error);
+});
+setCurrentRouter(new Router());
+await import("./features/auth/auth.controller.js");
+app.use(getCurrentRouter().routes(), getCurrentRouter().allowedMethods());
+
+export default app;
