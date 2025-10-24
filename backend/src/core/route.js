@@ -23,7 +23,7 @@ export const route = (method, endpoint, requestHandlers) => {
  * @param { import("@koa/router")<AppState> | null } router
  */
 export const setCurrentRouter = (router) => {
-  logger.debug("Setting current router:", router);
+  logger.debug("Setting current router");
   currentRouter = router;
 };
 
