@@ -15,6 +15,7 @@ app.on("error", (error) => {
 });
 setCurrentRouter(new Router());
 await import("./features/auth/auth.controller.js");
+await import("./features/restaurants/restaurants.controller.js");
 app.use(getCurrentRouter().routes(), getCurrentRouter().allowedMethods());
 
 export default app;
