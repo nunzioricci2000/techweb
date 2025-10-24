@@ -1,15 +1,15 @@
 /**
- * Creates a logger object that includes the caller's filename in log messages.
+ * Creates a console object that includes the caller's filename in log messages.
  *
- * Extracts the filename from the call stack and returns a logger with three methods
+ * Extracts the filename from the call stack and returns a console with three methods
  * for different log levels. Each log message is prefixed with the caller's filename
  * and the log level.
  *
  * @returns {Console} Logger object with methods for different log levels
  *
  * @example
- * const logger = createLoggerInternal();
- * logger.info("Application started");
+ * const console = createLoggerInternal();
+ * console.info("Application started");
  * // Output: [filename.js - INFO]: Application started
  */
 function createLoggerInternal() {
@@ -38,11 +38,11 @@ function createLoggerInternal() {
 }
 
 /**
- * Proxy logger that creates a new logger instance for each property access.
+ * Proxy console that creates a new console instance for each property access.
  * This ensures that the caller's filename is correctly captured in log messages.
  * @type {Console}
  */
-export const logger = new Proxy(
+export const console = new Proxy(
   {},
   {
     get(_target, prop) {

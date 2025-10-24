@@ -1,7 +1,6 @@
 import bcrypt from "bcrypt";
-import { logger } from "./logger.js";
 
-logger.debug("Loading Hash Handler");
+console.debug("Loading Hash Handler");
 
 /**
  * Number of salt rounds for bcrypt
@@ -9,7 +8,7 @@ logger.debug("Loading Hash Handler");
  * @private
  */
 const saltRounds = Number(process.env["SALT_ROUNDS"] ?? 10);
-logger.debug(`Using salt rounds: ${saltRounds}`);
+console.debug(`Using salt rounds: ${saltRounds}`);
 
 /**
  * Creates a hash of the given string
@@ -17,9 +16,9 @@ logger.debug(`Using salt rounds: ${saltRounds}`);
  * @returns {string} - The hashed string
  */
 export function hash(string) {
-  logger.debug(`Hashing string: ${string}`);
+  console.debug(`Hashing string: ${string}`);
   const result = bcrypt.hashSync(string, saltRounds);
-  logger.debug(`Hashed string: ${string} -> ${result}`);
+  console.debug(`Hashed string: ${string} -> ${result}`);
   return result;
 }
 
@@ -30,12 +29,12 @@ export function hash(string) {
  * @returns {boolean} - True if the string matches the hash, false otherwise
  */
 export function compare(string, hash) {
-  logger.debug(`Comparing string with hash: ${string} & ${hash}`);
+  console.debug(`Comparing string with hash: ${string} & ${hash}`);
   const result = bcrypt.compareSync(string, hash);
-  logger.debug(`Compared string with hash: ${string} & ${hash} -> ${result}`);
+  console.debug(`Compared string with hash: ${string} & ${hash} -> ${result}`);
   return result;
 }
 
 export default { hash, compare };
 
-logger.debug("Hash Handler loaded");
+console.debug("Hash Handler loaded");

@@ -1,7 +1,6 @@
 import multer from "@koa/multer";
-import { logger } from "../core/logger.js";
 
-logger.debug("Loading Multipart Parser Middleware");
+console.debug("Loading Multipart Parser Middleware");
 
 const parseMultipart = multer({
   storage: multer.memoryStorage(),
@@ -12,4 +11,4 @@ const parseMultipart = multer({
 
 export default parseMultipart;
 
-logger.debug("Multipart Parser Middleware loaded");
+console.debug("Multipart Parser Middleware loaded");

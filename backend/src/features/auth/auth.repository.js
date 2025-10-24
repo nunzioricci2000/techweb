@@ -1,7 +1,6 @@
 import db from "../../model/index.js";
-import { logger } from "../../core/logger.js";
 
-logger.debug("Loading Auth repository");
+console.debug("Loading Auth repository");
 
 /**
  * Creates a new user
@@ -9,9 +8,9 @@ logger.debug("Loading Auth repository");
  * @returns { Promise<number> }
  */
 export async function createUser({ username, password }) {
-  logger.debug("Creating user with username:", username);
+  console.debug("Creating user with username:", username);
   const result = await db("user").insert({ username, password }, "id");
-  logger.debug("Created user with ID:", result);
+  console.debug("Created user with ID:", result);
   return result;
 }
 
@@ -21,13 +20,13 @@ export async function createUser({ username, password }) {
  * @returns {Promise<User|undefined>}
  */
 export async function getUser(filter) {
-  logger.debug("Fetching user with filter:", filter);
+  console.debug("Fetching user with filter:", filter);
   const result = await db("user")
     .where(
       filter.by === "id" ? { id: filter.value } : { username: filter.value },
     )
     .first();
-  logger.debug("Fetched user:", result);
+  console.debug("Fetched user:", result);
   return result;
 }
 
@@ -36,7 +35,7 @@ export default {
   getUser,
 };
 
-logger.debug("Auth repository loaded");
+console.debug("Auth repository loaded");
 
 /**
  * User filter options for database queries

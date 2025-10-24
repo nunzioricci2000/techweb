@@ -1,7 +1,6 @@
 import db from "../../model/index.js";
-import { logger } from "../../core/logger.js";
 
-logger.debug("Loading Restaurants repository");
+console.debug("Loading Restaurants repository");
 
 /**
  * Retrieves all restaurants with optional filtering
@@ -9,15 +8,15 @@ logger.debug("Loading Restaurants repository");
  * @returns {Promise<Restaurant[]>}
  */
 export async function getAllRestaurants({ byName: name }) {
-  logger.debug("Querying all restaurants with name filter:", name);
+  console.debug("Querying all restaurants with name filter:", name);
   let query = db("restaurant").select("*");
   if (name) {
-    logger.debug("Applying name filter:", name);
+    console.debug("Applying name filter:", name);
     query = await query.where("name", "like", `%${name}%`);
   } else {
     query = await query;
   }
-  logger.debug("Queried restaurants:", query);
+  console.debug("Queried restaurants:", query);
   return query;
 }
 
@@ -27,9 +26,9 @@ export async function getAllRestaurants({ byName: name }) {
  * @returns {Promise<Restaurant|undefined>}
  */
 export async function getRestaurantById(id) {
-  logger.debug("Fetching restaurant by ID from DB:", id);
+  console.debug("Fetching restaurant by ID from DB:", id);
   const result = await db("restaurant").where({ id }).first("*");
-  logger.debug("Fetched restaurant:", result);
+  console.debug("Fetched restaurant:", result);
   return result;
 }
 
@@ -39,9 +38,9 @@ export async function getRestaurantById(id) {
  * @returns {Promise<number>}
  */
 export async function createRestaurant(data) {
-  logger.debug("Creating restaurant with data:", data);
+  console.debug("Creating restaurant with data:", data);
   const result = await db("restaurant").insert(data, "*");
-  logger.debug("Created restaurant with ID:", result);
+  console.debug("Created restaurant with ID:", result);
   return result;
 }
 
@@ -51,9 +50,9 @@ export async function createRestaurant(data) {
  * @returns {Promise<void>}
  */
 export async function deleteRestaurant(id) {
-  logger.debug("Deleting restaurant by ID from DB:", id);
+  console.debug("Deleting restaurant by ID from DB:", id);
   await db("restaurant").where({ id }).del();
-  logger.debug("Deleted restaurant with ID:", id);
+  console.debug("Deleted restaurant with ID:", id);
 }
 
 export default {
@@ -63,7 +62,7 @@ export default {
   deleteRestaurant,
 };
 
-logger.debug("Restaurants repository loaded");
+console.debug("Restaurants repository loaded");
 
 /**
  * Restaurant filter

@@ -1,7 +1,6 @@
 import bodyParser from "@koa/bodyparser";
-import { logger } from "../core/logger.js";
 
-logger.debug("Loading Body Parser Middleware");
+console.debug("Loading Body Parser Middleware");
 
 /**
  * Body parsing middleware for Koa.js
@@ -9,9 +8,9 @@ logger.debug("Loading Body Parser Middleware");
  */
 export default bodyParser({
   onError(err, ctx) {
-    logger.debug("Body parse error:", err);
+    console.debug("Body parse error:", err);
     ctx.throw(422, "body parse error");
   },
 });
 
-logger.debug("Body Parser Middleware loaded");
+console.debug("Body Parser Middleware loaded");

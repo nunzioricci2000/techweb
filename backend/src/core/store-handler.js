@@ -1,23 +1,22 @@
 import fs from "fs/promises";
 import path from "path";
-import { logger } from "./logger.js";
 
-logger.debug("Loading Store Handler");
+console.debug("Loading Store Handler");
 
 const UPLOAD_DIR = process.env["FILE_STORAGE"];
-logger.debug("Using upload directory from environment:", UPLOAD_DIR);
+console.debug("Using upload directory from environment:", UPLOAD_DIR);
 
 await fs.mkdir(UPLOAD_DIR, { recursive: true });
 
 async function fileExists(filename) {
   try {
-    logger.debug(`Checking if file exists: ${filename}`);
+    console.debug(`Checking if file exists: ${filename}`);
     const filepath = path.join(UPLOAD_DIR, filename);
     await fs.access(filepath);
-    logger.debug(`File exists: ${filename}`);
+    console.debug(`File exists: ${filename}`);
     return true;
   } catch {
-    logger.debug(`File does not exist: ${filename}`);
+    console.debug(`File does not exist: ${filename}`);
     return false;
   }
 }
@@ -35,14 +34,14 @@ async function fileExists(filename) {
  * console.log(`File saved as: ${filename}`);
  */
 export async function saveFile({ buffer, saveAs: filename }) {
-  logger.debug(`Saving file as: ${filename}`);
+  console.debug(`Saving file as: ${filename}`);
   if (!filename) {
-    logger.error("No filename provided for saving file");
+    console.error("No filename provided for saving file");
     throw new Error("No filename provided");
   }
   const filepath = path.join(UPLOAD_DIR, filename);
   await fs.writeFile(filepath, buffer);
-  logger.debug(`File saved successfully as: ${filename}`);
+  console.debug(`File saved successfully as: ${filename}`);
   return filename;
 }
 /**
@@ -58,18 +57,18 @@ export async function saveFile({ buffer, saveAs: filename }) {
  * const fileBuffer = await getFile('restaurant-1692345678901-photo.jpg');
  */
 export async function getFile(filename) {
-  logger.debug(`Retrieving file: ${filename}`);
+  console.debug(`Retrieving file: ${filename}`);
   if (!filename) {
-    logger.error("No filename provided for retrieving file");
+    console.error("No filename provided for retrieving file");
     throw new Error("No filename provided");
   }
   const filepath = path.join(UPLOAD_DIR, filename);
   if (!(await fileExists(filename))) {
-    logger.error(`File not found: ${filename}`);
+    console.error(`File not found: ${filename}`);
     throw new Error("File not found");
   }
   const result = await fs.readFile(filepath);
-  logger.debug(`File retrieved successfully: ${filename}`);
+  console.debug(`File retrieved successfully: ${filename}`);
   return result;
 }
 
@@ -78,4 +77,4 @@ export default {
   getFile,
 };
 
-logger.debug("Store Handler loaded");
+console.debug("Store Handler loaded");

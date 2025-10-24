@@ -5,9 +5,8 @@ import validate from "../../middleware/validate.js";
 import prune from "../../middleware/prune.js";
 import { route } from "../../core/route.js";
 import Joi from "joi";
-import { logger } from "../../core/logger.js";
 
-logger.debug("Loading Restaurants controller");
+console.debug("Loading Restaurants controller");
 
 const name = Joi.string().min(2).max(50);
 const description = Joi.string().min(10).max(500);
@@ -41,13 +40,13 @@ route("post", "/restaurants", [
     }),
   ),
   async (ctx) => {
-    logger.debug("Handling create restaurant request");
-    logger.debug("Request body:", ctx.request.body);
+    console.debug("Handling create restaurant request");
+    console.debug("Request body:", ctx.request.body);
     const { name, description, latitude, longitude } = ctx.request.body;
     /** @type {import("@koa/multer").File | undefined} */
     const image = ctx.request.file;
     if (!image) {
-      logger.error("Image file is missing in the request");
+      console.error("Image file is missing in the request");
       ctx.status = 400;
       ctx.body = { error: "Image file is required" };
       return;
@@ -73,7 +72,7 @@ route("post", "/restaurants", [
     delete restaurant.image;
     ctx.status = 201;
     ctx.body = restaurant;
-    logger.debug("Restaurant created:", restaurant);
+    console.debug("Restaurant created:", restaurant);
   },
 ]);
 
@@ -83,4 +82,4 @@ route("get", "/restaurants/:id/photo", [
   },
 ]);
 
-logger.debug("Restaurants controller loaded");
+console.debug("Restaurants controller loaded");

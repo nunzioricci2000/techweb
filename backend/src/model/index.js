@@ -1,9 +1,8 @@
 import knex from "knex";
 import initUserModel from "./user.model.js";
 import initRestaurantModel from "./restaurant.model.js";
-import { logger } from "../core/logger.js";
 
-logger.debug("Initializing database connection");
+console.debug("Initializing database connection");
 
 const db = knex({
   client: "sqlite3",
@@ -16,6 +15,6 @@ const db = knex({
 await initUserModel(db);
 await initRestaurantModel(db);
 
-logger.debug("Database initialized");
+console.debug("Database initialized");
 
 export default db;

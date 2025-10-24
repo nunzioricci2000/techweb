@@ -1,7 +1,6 @@
 import restaurantRepository from "./restaurants.repository.js";
-import { logger } from "../../core/logger.js";
 
-logger.debug("Loading Restaurants service");
+console.debug("Loading Restaurants service");
 
 /**
  * @type {Set<OnDeleteRestaurantCallback>}
@@ -16,11 +15,11 @@ const onDeleteRestaurantSubscribers = new Set();
  * @returns {Promise<RestaurantOverview[]>}
  */
 export async function getAllRestaurants(name) {
-  logger.debug("Fetching all restaurants with name filter:", name);
+  console.debug("Fetching all restaurants with name filter:", name);
   const result = await restaurantRepository.getAllRestaurants({
     byName: name,
   });
-  logger.debug("Fetched restaurants:", result);
+  console.debug("Fetched restaurants:", result);
   return result;
 }
 
@@ -31,13 +30,13 @@ export async function getAllRestaurants(name) {
  * @throws {Error} If the restaurant is not found
  */
 export async function getRestaurantById(id) {
-  logger.debug("Fetching restaurant by ID:", id);
+  console.debug("Fetching restaurant by ID:", id);
   const restaurant = await restaurantRepository.getRestaurantById(id);
   if (!restaurant) {
-    logger.error("Restaurant not found with ID:", id);
+    console.error("Restaurant not found with ID:", id);
     throw new Error("Restaurant not found");
   }
-  logger.debug("Fetched restaurant:", restaurant);
+  console.debug("Fetched restaurant:", restaurant);
   return restaurant;
 }
 
@@ -48,14 +47,14 @@ export async function getRestaurantById(id) {
  * @throws {Error} If creation fails
  */
 export async function createRestaurant(restaurantData) {
-  logger.debug("Creating new restaurant with data:", restaurantData);
+  console.debug("Creating new restaurant with data:", restaurantData);
   const newRestaurantId =
     await restaurantRepository.createRestaurant(restaurantData);
   if (!newRestaurantId) {
-    logger.error("Failed to create restaurant with data:", restaurantData);
+    console.error("Failed to create restaurant with data:", restaurantData);
     throw new Error("Failed to create restaurant");
   }
-  logger.debug("Created restaurant with ID:", newRestaurantId);
+  console.debug("Created restaurant with ID:", newRestaurantId);
   return newRestaurantId;
 }
 
@@ -66,15 +65,15 @@ export async function createRestaurant(restaurantData) {
  * @throws {Error} If the restaurant is not found or deletion fails
  */
 export async function deleteRestaurant(id) {
-  logger.debug("Deleting restaurant with ID:", id);
+  console.debug("Deleting restaurant with ID:", id);
   const restaurant = await restaurantRepository.getRestaurantById(id);
   if (!restaurant) {
-    logger.error("Restaurant not found with ID:", id);
+    console.error("Restaurant not found with ID:", id);
     throw new Error("Restaurant not found");
   }
   onDeleteRestaurantSubscribers.forEach((callback) => callback(id));
   await restaurantRepository.deleteRestaurant(id);
-  logger.debug("Deleted restaurant with ID:", id);
+  console.debug("Deleted restaurant with ID:", id);
 }
 
 /**
@@ -83,7 +82,7 @@ export async function deleteRestaurant(id) {
  * @return {() => void} A function to unregister the callback
  */
 export function onDeleteRestaurant(callback) {
-  logger.debug("Registering onDeleteRestaurant callback");
+  console.debug("Registering onDeleteRestaurant callback");
   onDeleteRestaurantSubscribers.add(callback);
   return () => onDeleteRestaurantSubscribers.delete(callback);
 }
@@ -96,7 +95,7 @@ export default {
   onDeleteRestaurant,
 };
 
-logger.debug("Restaurants service loaded");
+console.debug("Restaurants service loaded");
 
 /**
  * @callback OnDeleteRestaurantCallback
