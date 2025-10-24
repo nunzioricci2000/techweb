@@ -29,9 +29,11 @@ function createLoggerInternal() {
     log: (message, ...optionalParams) => {
       console.log(`[${filename} - LOG]: ${message}`, ...optionalParams);
     },
-    debug: (message, ...optionalParams) => {
-      console.log(`[${filename} - DEBUG]: ${message}`, ...optionalParams);
-    },
+    debug: process.env["DEBUG"]
+      ? (message, ...optionalParams) => {
+          console.log(`[${filename} - DEBUG]: ${message}`, ...optionalParams);
+        }
+      : () => {},
   };
 }
 

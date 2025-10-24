@@ -8,6 +8,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
+    "start:debug": "DEBUG=true node src/index.js",
     "lint": "npx eslint -c config/eslint.config.js .",
     "prettier": "npx prettier . -w",
     "test": "node --test"
