@@ -1,3 +1,7 @@
+import { logger } from "./logger.js";
+
+logger.debug("Loading Route Handler");
+
 /**
  * @type { import("@koa/router")<AppState> | null }
  */
@@ -10,6 +14,7 @@ let currentRouter = null;
  * @param {import("koa").Middleware<AppState>[]} requestHandlers - The request handlers for the route
  */
 export const route = (method, endpoint, requestHandlers) => {
+  logger.debug(`Defining route: [${method.toUpperCase()}] ${endpoint}`);
   currentRouter[method](endpoint, ...requestHandlers);
 };
 
@@ -18,6 +23,7 @@ export const route = (method, endpoint, requestHandlers) => {
  * @param { import("@koa/router")<AppState> | null } router
  */
 export const setCurrentRouter = (router) => {
+  logger.debug("Setting current router:", router);
   currentRouter = router;
 };
 
@@ -26,6 +32,8 @@ export const setCurrentRouter = (router) => {
  * @returns { import("@koa/router")<AppState> | null }
  */
 export const getCurrentRouter = () => currentRouter;
+
+logger.debug("Route Handler loaded");
 
 /**
  * @typedef {object} Route
