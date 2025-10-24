@@ -5,6 +5,9 @@ import parseBody from "../../middleware/parse-body.js";
 import validate from "../../middleware/validate.js";
 import prune from "../../middleware/prune.js";
 import Joi from "joi";
+import { logger } from "../../core/logger.js";
+
+logger.debug("Loading Auth controller");
 
 const username = Joi.string().alphanum().min(8).max(30);
 const password = Joi.string().pattern(
@@ -28,11 +31,15 @@ route("post", "/auth/login", [
     }),
   ),
   async (ctx) => {
+    logger.debug("Handling login request");
     const { username, password } = ctx.request.body;
+    logger.debug(`Login attempt for user: ${username}`);
     const token = await authService.login({ username, password });
     if (token) {
+      logger.debug(`Login successful for user: ${username}`);
       ctx.body = { token };
     } else {
+      logger.debug(`Login failed for user: ${username}`);
       ctx.status = 401;
       ctx.body = { error: "Invalid credentials" };
     }
@@ -56,11 +63,17 @@ route("post", "/auth/register", [
     }),
   ),
   async (ctx) => {
+    logger.debug("Handling registration request");
     const { username, password } = ctx.request.body;
+    logger.debug(`Registration attempt for user: ${username}`);
     try {
       const token = await authService.register({ username, password });
+      logger.debug(`Registration successful for user: ${username}`);
       ctx.body = { token };
     } catch (error) {
+      logger.debug(
+        `Registration failed for user: ${username} - ${error.message}`,
+      );
       ctx.status = 400;
       ctx.body = { error: error.message };
     }
@@ -78,6 +91,9 @@ route("get", "/auth/me", [
   ),
   checkAuth.required,
   (ctx) => {
+    logger.debug("Handling get current user request for user:", ctx.state.user);
     ctx.body = { username: ctx.state.user.username };
   },
 ]);
+
+logger.debug("Auth controller loaded");
