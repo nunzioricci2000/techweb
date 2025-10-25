@@ -17,11 +17,11 @@ export async function login({ username, password }) {
   });
   if (!user) {
     console.debug("User not found:", username);
-    throw Error("User not found!");
+    throw { message: "User not found!", type: "user-not-found" };
   }
   if (!hashHandler.compare(password, user.password)) {
     console.debug("Wrong password for user:", username);
-    throw Error("Wrong password!");
+    throw { message: "Wrong password!", type: "wrong-password" };
   }
   const result = jwtHandler.sign(username);
   console.debug("Login successful for user:", username);

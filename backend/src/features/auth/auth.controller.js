@@ -33,7 +33,13 @@ route("post", "/auth/login", [
     console.debug("Handling login request");
     const { username, password } = ctx.request.body;
     console.debug(`Login attempt for user: ${username}`);
-    const token = await authService.login({ username, password });
+    const token = await (async () => {
+      try {
+        return await authService.login({ username, password });
+      } catch {
+        return null;
+      }
+    })();
     if (token) {
       console.debug(`Login successful for user: ${username}`);
       ctx.body = { token };
