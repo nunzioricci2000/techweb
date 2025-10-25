@@ -12,12 +12,11 @@ export async function getAllRestaurants({ byName: name }) {
   let query = db("restaurant").select("*");
   if (name) {
     console.debug("Applying name filter:", name);
-    query = await query.where("name", "like", `%${name}%`);
-  } else {
-    query = await query;
+    query = query.where("name", "like", `%${name}%`);
   }
-  console.debug("Queried restaurants:", query);
-  return query;
+  const result = await query;
+  console.debug("Queried restaurants:", result);
+  return result;
 }
 
 /**
@@ -35,12 +34,17 @@ export async function getRestaurantById(id) {
 /**
  * Creates a new restaurant
  * @param {Omit<Restaurant, 'id'>} restaurant
- * @returns {Promise<number>}
+ * @returns {Promise<Restaurant|null>}
  */
 export async function createRestaurant(data) {
   console.debug("Creating restaurant with data:", data);
-  const result = await db("restaurant").insert(data, "*");
-  console.debug("Created restaurant with ID:", result);
+  const list = await db("restaurant").insert(data, "*");
+  if (!list || list.length === 0) {
+    return null;
+  }
+  const result = list[0];
+  result.geolocation = JSON.parse(result.geolocation);
+  console.debug("Created restaurant:", result);
   return result;
 }
 

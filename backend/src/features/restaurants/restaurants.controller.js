@@ -36,7 +36,8 @@ route("post", "/restaurants", [
         latitude: latitude.required(),
         longitude: longitude.required(),
       }).required(),
-      imageUrl: Joi.string(),
+      imageUrl: Joi.string().required(),
+      owner: Joi.string().required(),
     }),
   ),
   async (ctx) => {
@@ -63,13 +64,10 @@ route("post", "/restaurants", [
       image: { data: image.buffer, format: image.mimetype },
       owner,
     };
-    const restaurantId =
-      await restaurantService.createRestaurant(restaurantData);
-    const restaurant = {
-      ...(await restaurantService.getRestaurantById(restaurantId)),
-    };
-    restaurant.imageUrl = `/restaurants/${restaurantId}/photo`;
+    const restaurant = await restaurantService.createRestaurant(restaurantData);
+    restaurant.imageUrl = `/restaurants/${restaurant.id}/photo`;
     delete restaurant.image;
+    restaurant.owner = ctx.state.user.username;
     ctx.status = 201;
     ctx.body = restaurant;
     console.debug("Restaurant created:", restaurant);

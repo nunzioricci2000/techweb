@@ -43,19 +43,19 @@ export async function getRestaurantById(id) {
 /**
  * Creates a new restaurant.
  * @param {Omit<Restaurant, 'id'>} restaurantData - Data for the new restaurant
- * @returns {Promise<number>} The ID of the newly created restaurant
+ * @returns {Promise<Restaurant>} The ID of the newly created restaurant
  * @throws {Error} If creation fails
  */
 export async function createRestaurant(restaurantData) {
   console.debug("Creating new restaurant with data:", restaurantData);
-  const newRestaurantId =
+  const newRestaurant =
     await restaurantRepository.createRestaurant(restaurantData);
-  if (!newRestaurantId) {
+  if (!newRestaurant) {
     console.error("Failed to create restaurant with data:", restaurantData);
     throw new Error("Failed to create restaurant");
   }
-  console.debug("Created restaurant with ID:", newRestaurantId);
-  return newRestaurantId;
+  console.debug("Created restaurant:", newRestaurant);
+  return newRestaurant;
 }
 
 /**
