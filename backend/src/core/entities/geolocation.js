@@ -1,5 +1,5 @@
 /**
- * Geolocation entity class
+ * Geolocation entity
  */
 export default class Geolocation {
   /** @type {number} */

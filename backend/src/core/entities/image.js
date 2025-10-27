@@ -1,3 +1,6 @@
+/**
+ * Image entity
+ */
 export default class Image {
   /** @type {string} */
   #url;
