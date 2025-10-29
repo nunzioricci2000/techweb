@@ -14,7 +14,7 @@ The primary focus during the development of this project was simplicity. Instead
 
 - **Backend**: Koa – A minimalist Node.js framework for building lightweight and flexible server-side applications.
 - **Frontend**: Preact – A fast, lightweight alternative to React with a small footprint.
-- **Code Quality**: 
+- **Code Quality**:
   - **ESLint** – A static code analysis tool for identifying problematic patterns in JavaScript code. While complex to configure, ESLint provides visible improvements in code consistency and helps maintain high-quality, error-free code, enhancing my control over the codebase.
   - **Prettier** – An opinionated code formatter that enforces consistent style across the project. Though it introduces additional development dependencies, Prettier's clear, automated formatting reduces manual effort and improves readability, aligning with my goal of maintaining control over the code.
 - **No Transpilers**: Handwritten JavaScript for maximum control and clarity.
@@ -29,4 +29,4 @@ The primary focus during the development of this project was simplicity. Instead
 
 ---
 
-*This project was created for educational and entertainment purposes as part of the Web Technologies course at the University of Naples "Federico II".*
+_This project was created for educational and entertainment purposes as part of the Web Technologies course at the University of Naples "Federico II"._

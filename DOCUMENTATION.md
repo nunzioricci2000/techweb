@@ -24,10 +24,11 @@ export class AuthService {
     }
 }
 ```
+
 ```mjs
 /// Example of usage
-import { AuthRepository } from './auth.repositiry.js';
-import { AuthService } from './auth.service.js';
+import { AuthRepository } from "./auth.repositiry.js";
+import { AuthService } from "./auth.service.js";
 /// ...other code...
 const authRepository = new AuthRepository(db);
 const authService = new AuthService(authRepository);
@@ -40,17 +41,18 @@ During the early stages of development I had to cope with some stylistic and pro
 ```mjs
 /// An example with functions
 export function AuthService({ authRepository }) {
-    return {
-        register(username, password) {
-            authRepository.createUser({ username, password });
-        },
-    };
+  return {
+    register(username, password) {
+      authRepository.createUser({ username, password });
+    },
+  };
 }
 ```
+
 ```mjs
 /// Example of usage
-import { AuthRepository } from './auth.repositiry.js';
-import { AuthService } from './auth.service.js';
+import { AuthRepository } from "./auth.repositiry.js";
+import { AuthService } from "./auth.service.js";
 /// ...other code...
 const authRepository = AuthRepository(db);
 const authService = AuthService(authRepository);
@@ -61,17 +63,18 @@ Anyway I felt that this type of initialization was too verbose and I choose to s
 
 ```mjs
 /// An example with bare methods
-import authRepository from './auth.repository.js';
+import authRepository from "./auth.repository.js";
 
 export function register(username, password) {
-    authRepository.createUser({ username, password });
+  authRepository.createUser({ username, password });
 }
 
 export default { register };
 ```
+
 ```mjs
 /// Example of usage
-import authService from './auth.service.js';
+import authService from "./auth.service.js";
 authService.register(username, password);
 ```
 
@@ -107,7 +110,7 @@ This project uses tools from the Modern Web suite, such as @web/dev-server, for 
 
 The project aims to minimize "build steps" to streamline development and reduce complexity. While a no-build workflow is ideal, certain tools may still require minimal processing. The goal is to keep these steps as simple and unobtrusive as possible, ensuring that the core learning experience remains focused on fundamental web technologies.
 
-Using a no-build workflow would require tools like *import maps*, but this approach presents challenges: it either requires external dependencies (physically external, hosted on another server) or involves workarounds to serve them locally from the node_modules folder. These solutions would be somewhat hacky and lack elegance, which conflicts with the project's philosophy of simplicity and clarity.
+Using a no-build workflow would require tools like _import maps_, but this approach presents challenges: it either requires external dependencies (physically external, hosted on another server) or involves workarounds to serve them locally from the node_modules folder. These solutions would be somewhat hacky and lack elegance, which conflicts with the project's philosophy of simplicity and clarity.
 
 ### Pico CSS
 
@@ -125,5 +128,6 @@ As said, the project is intended to have as less "build steps" as possibile (ide
 ### Why ESLint?
 
 ESLint is chosen to maintain code quality and consistency across the project. Its benefits include:
+
 - **Error Detection**: ESLint helps identify potential issues and bugs in the code early in the development process.
 - **Code Consistency**: It enforces coding standards and best practices, ensuring a uniform style throughout the codebase.

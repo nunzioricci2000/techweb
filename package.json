@@ -23,7 +23,7 @@
   "scripts": {
     "start": "node index.js start",
     "lint": "node index.js lint",
-    "prettier": "node index.js prettier",
+    "prettier": "npx prettier -w .",
     "test": "node --test",
     "prepare": "husky"
   },

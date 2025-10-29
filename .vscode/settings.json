@@ -1,0 +1,10 @@
+{
+  "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
+  "editor.formatOnSave": true,
+  "customLocalFormatters.formatters": [
+    {
+      "command": "npm run prettier",
+      "languages": ["js", "json", "markdown", "html"]
+    }
+  ]
+}
