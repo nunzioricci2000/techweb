@@ -1,5 +1,13 @@
 /**
- * Geolocation entity
+ * Geolocation entity representing an immutable geographic coordinate.
+ * Immutable value object that stores latitude and longitude in decimal degrees.
+ *
+ * @class Geolocation
+ *
+ * @example
+ * const g = new Geolocation({ latitude: 45.0, longitude: 9.19 });
+ * console.log(g.latitude); // 45
+ * console.log(g.longitude); // 9.19
  */
 export default class Geolocation {
   /** @type {number} */
@@ -24,10 +32,16 @@ export default class Geolocation {
   }
 
   /**
-   * Geolocation entity
-   * @param {object} params
-   * @param {number} params.latitude - Latitude coordinate
-   * @param {number} params.longitude - Longitude coordinate
+   * @param {Object} params - Constructor parameters.
+   * @param {number} params.latitude - Latitude coordinate in decimal degrees. Must be between -90 and 90.
+   * @param {number} params.longitude - Longitude coordinate in decimal degrees. Must be between -180 and 180.
+   *
+   * @property {number} latitude - Read-only latitude in decimal degrees.
+   * @property {number} longitude - Read-only longitude in decimal degrees.
+   *
+   * @throws {TypeError} If latitude or longitude is not a number.
+   * @throws {RangeError} If latitude is outside [-90, 90] or longitude is outside [-180, 180].
+   *
    */
   constructor({ latitude, longitude }) {
     if (typeof latitude !== "number" || typeof longitude !== "number") {

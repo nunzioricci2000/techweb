@@ -1,5 +1,12 @@
 /**
- * Image entity
+ * Image entity representing an image resource.
+ * Immutable entity that encapsulates an image URL.
+ *
+ * @class Image
+ *
+ * @example
+ * const img = new Image({ url: 'https://example.com/image.jpg' });
+ * console.log(img.url); // 'https://example.com/image.jpg'
  */
 export default class Image {
   /** @type {string} */
@@ -14,9 +21,10 @@ export default class Image {
   }
 
   /**
-   * Image entity
-   * @param {object} params
-   * @param {string} params.url - URL of the image
+   * @param {Object} params - Constructor parameters.
+   * @param {string} params.url - URL of the image.
+   *
+   * @throws {TypeError} If `url` is not a string.
    */
   constructor({ url }) {
     if (typeof url !== "string") {
